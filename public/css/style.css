@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+.container {
+  height: 100vh;
+}
+
+header {
+    height: 150px;
+    padding-top: 80px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#start-btn {
+    padding: 15px;
+    background-color: lightsalmon;
+    color: white;
+    text-align: center;
+}
+
+#start-btn:hover {
+    background-color: lightgray;
+}
+
+#button-container {
+    text-align: center;
+}
