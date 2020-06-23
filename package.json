@@ -18,7 +18,5 @@
     "url": "https://github.com/egrenegar/korean-culture-quiz/issues"
   },
   "homepage": "https://github.com/egrenegar/korean-culture-quiz#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "dependencies": {}
 }
