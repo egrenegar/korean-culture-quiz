@@ -33,3 +33,24 @@ header {
 #button-container {
     text-align: center;
 }
+
+.quiz-questions {
+  text-align: center;
+}
+
+.question-header {
+  padding: 15px 8px 8px 8px;
+}
+
+.answer-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  background-color: lightsalmon;
+}
+
+.answer-btn:hover {
+  background-color: lightgrey;
+}
