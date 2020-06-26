@@ -1,9 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     const questionsDiv = $('.quiz-questions');
     const timer = $('#time-left');
     let timeInterval;
-    let leaderboard = {};
+    let leaderboard = {
+        score: [],
+        initials: []
+    };
     let questionIndex = 0;
     let timeLeft = 75;
     // All quiz questions and answers
@@ -72,58 +75,30 @@ $(document).ready(function() {
     // Start the timer at 75 seconds
     const startTimer = () => {
         timeInterval = setInterval(function () {
-        timer.text(timeLeft);
-        timeLeft--;
+            timer.text(timeLeft);
+            timeLeft--;
         }, 1000);
-    
+
         ask();
-    
+
     }
     // Ask a quiz question depending on the current quiz index
     const ask = () => {
         if (questions[questionIndex] === undefined) {
-            $('.row.centered').empty();
-            userScore = timer.text();
-            clearInterval(timeInterval);
-            
-            const formHeader = $('<h3>').text(`Your score is ${userScore}.`);
-            const newRow = $('<div>').addClass(['row', 'centered']);
-            const form = $('<div>').addClass(['ui', 'form']);
-            const field = $('<div>').addClass('field');
-            const label = $('<label>').text('Enter Your Initials:');
-            const input = $('<input>').attr('type', 'text');
-            const submit = $('<a>').addClass(['ui', 'button']).text('Submit');
-            $('.row.centered').append(formHeader);
-            $('.ui.column.grid').append(newRow);
-            $(newRow).append(form);
-            $(form).append(field);
-            $(field).append(label);
-            $(field).append(input);
-            $(form).append(submit);
-    
-            // localStorage.setItem('userScore', leaderboard);
-    
-    
-            // create a blank object to push initials
-            // key: user score & initials
-            // value: score from score variable 
-            // have two properties for 
-            // scoreArr.push(userScore);
-            // console.log(scoreArr);
-            // console.log(userScore);
+            enterInitials();
         }
-    
+
         // Display the question
         const newQ = $('<h3>').addClass(['header', 'question-header']).text(questions[questionIndex].q);
         const answersArray = questions[questionIndex].a;
         questionsDiv.append(newQ);
-    
+
         // Display the answers
         for (let i = 0; i < answersArray.length; i++) {
             const answerChoice = $('<button>').addClass(['button', 'answer-btn']).attr('value', answersArray[i]).text(answersArray[i]);
             questionsDiv.append(answerChoice);
         }
-    
+
         // Determine right or wrong answer
         $('.answer-btn').on('click', function () {
             console.log('You answered: ' + this.value);
@@ -138,9 +113,40 @@ $(document).ready(function() {
             questionsDiv.empty();
             ask();
         });
-    
+
     }
-    
+
+    const enterInitials = () => {
+        $('.row.centered').empty();
+        userScore = timer.text();
+        leaderboard.score.push(userScore);
+        console.log(leaderboard);
+        clearInterval(timeInterval);
+        // Creating the initials form
+        const formHeader = $('<h3>').text(`Your score is ${userScore}.`);
+        const newRow = $('<div>').addClass(['row', 'centered']);
+        const form = $('<div>').addClass(['ui', 'form']);
+        const field = $('<div>').addClass('field');
+        const label = $('<label>').text('Enter Your Initials:');
+        const input = $('<input>').attr('type', 'text').attr('id', 'initials-input');
+        const submit = $('<a>').addClass(['ui', 'button']).text('Submit');
+        $('.row.centered').append(formHeader);
+        $('.ui.column.grid').append(newRow);
+        $(newRow).append(form);
+        $(form).append(field);
+        $(field).append(label);
+        $(field).append(input);
+        $(form).append(submit);
+
+        // localStorage.setItem('userScore', leaderboard);
+        submit.on('submit', function () {
+            console.log('initials submitted');
+            let initials = $('#initials-input').val();
+            leaderboard.initials.push(initials);
+            console.log(leaderboard);
+        });
+    }
+
     startTimer();
 
 });
