@@ -1,7 +1,8 @@
 const questionsDiv = $('.quiz-questions');
 const timer = $('#time-left');
-var questionIndex = 0;
-var timeLeft = 75;
+let timeInterval;
+let questionIndex = 0;
+let timeLeft = 75;
 let userScore;
 
 var questions = [
@@ -68,17 +69,17 @@ var questions = [
 ]
 
 function startTimer() {
-    let timeInterval = setInterval(function () {
-        timer.text(timeLeft);
-        timeLeft--;
+    timeInterval = setInterval(function () {
+    timer.text(timeLeft);
+    timeLeft--;
 
-        if (timeLeft < 0) {
-            clearInterval(timeInterval);
-        }
+    if (timeLeft < 0) {
+        clearInterval(timeInterval);
+    }
     }, 1000);
-    
+
     ask();
-    
+
 }
 
 function ask() {
@@ -101,23 +102,24 @@ function ask() {
     questionsDiv.append(newQ);
 
     for (let i = 0; i < answersArray.length; i++) {
-        let answerChoice = $('<button>').addClass(['button', 'answer-btn']).text(answersArray[i]);
+        let answerChoice = $('<button>').addClass(['button', 'answer-btn']).attr('value', answersArray[i]).text(answersArray[i]);
         questionsDiv.append(answerChoice);
     }
-    
-    $('.answer-btn').on('click', function() {
-        console.log('clicked');
-        if (questions[questionIndex].correct === this.value) {
+
+    $('.answer-btn').on('click', function () {
+        console.log('You answered: ' + this.value);
+        if (questions[questionIndex].correct !== this.value) {
+            timeLeft -= 10;
             questionIndex++
         } else {
-            timeLeft -= 10;
+            console.log('Correct!');
             questionIndex++
         }
         questionsDiv.empty();
         ask();
     });
 
-    
+
 }
 
 startTimer();
