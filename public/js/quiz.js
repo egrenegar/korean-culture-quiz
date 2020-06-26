@@ -1,11 +1,11 @@
 const questionsDiv = $('.quiz-questions');
 const timer = $('#time-left');
 let timeInterval;
+let leaderboard = {};
 let questionIndex = 0;
 let timeLeft = 75;
-let userScore;
-
-var questions = [
+// All quiz questions and answers
+const questions = [
     {
         q: 'What is the name of South Korea\'s current president?',
         a: ['Park Geun-Hye', 'Moon Jae-In', 'Kim Jong-Un', 'Choi Ji-Min'],
@@ -67,26 +67,40 @@ var questions = [
         correct: 'Baseball'
     }
 ]
-
-function startTimer() {
+// Start the timer at 75 seconds
+const startTimer = () => {
     timeInterval = setInterval(function () {
     timer.text(timeLeft);
     timeLeft--;
-
-    if (timeLeft < 0) {
-        clearInterval(timeInterval);
-    }
     }, 1000);
 
     ask();
 
 }
-
-function ask() {
-    // console.log(questionIndex);
+// Ask a quiz question depending on the current quiz index
+const ask = () => {
     if (questions[questionIndex] === undefined) {
+        $('.row.centered').empty();
+        userScore = timer.text();
         clearInterval(timeInterval);
-        userScore = timeLeft;
+        // console.log(userScore);
+        // localStorage.setItem('userScore', userScore);
+        const formHeader = $('<h3>').text(`Your score is ${userScore}!`);
+        const newRow = $('<div>').addClass(['row', 'centered']);
+        const form = $('<div>').addClass(['ui', 'form']);
+        const field = $('<div>').addClass('field');
+        const label = $('<label>').text('Enter Your Initials:');
+        const input = $('<input>').attr('type', 'text');
+        const submit = $('<a>').addClass(['ui', 'button']).text('Submit');
+        $('.row.centered').append(formHeader);
+        $('.ui.column.grid').append(newRow);
+        $(newRow).append(form);
+        $(form).append(field);
+        $(field).append(label);
+        $(field).append(input);
+        $(form).append(submit);
+
+
         // create a blank object to push initials
         // key: user score & initials
         // value: score from score variable 
@@ -94,18 +108,20 @@ function ask() {
         // scoreArr.push(userScore);
         // console.log(scoreArr);
         // console.log(userScore);
-        location.redirect('/initials');
     }
 
-    var newQ = $('<h3>').addClass(['header', 'question-header']).text(questions[questionIndex].q);
-    var answersArray = questions[questionIndex].a;
+    // Display the question
+    const newQ = $('<h3>').addClass(['header', 'question-header']).text(questions[questionIndex].q);
+    const answersArray = questions[questionIndex].a;
     questionsDiv.append(newQ);
 
+    // Display the answers
     for (let i = 0; i < answersArray.length; i++) {
-        let answerChoice = $('<button>').addClass(['button', 'answer-btn']).attr('value', answersArray[i]).text(answersArray[i]);
+        const answerChoice = $('<button>').addClass(['button', 'answer-btn']).attr('value', answersArray[i]).text(answersArray[i]);
         questionsDiv.append(answerChoice);
     }
 
+    // Determine right or wrong answer
     $('.answer-btn').on('click', function () {
         console.log('You answered: ' + this.value);
         if (questions[questionIndex].correct !== this.value) {
@@ -115,10 +131,10 @@ function ask() {
             console.log('Correct!');
             questionIndex++
         }
+        // Clear previous question and ask next question
         questionsDiv.empty();
         ask();
     });
-
 
 }
 
