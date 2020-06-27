@@ -9,64 +9,64 @@ $(document).ready(function () {
     // All quiz questions and answers
     const questions = [
         {
-            q: 'What is the name of South Korea\'s current president?',
-            a: ['Park Geun-Hye', 'Moon Jae-In', 'Kim Jong-Un', 'Choi Ji-Min'],
-            correct: 'Moon Jae-In'
+            q: '1. What is the name of South Korea\'s current president?',
+            a: ['A. Park Geun-Hye', 'B. Moon Jae-In', 'C. Kim Jong-Un', 'D. Choi Ji-Min'],
+            correct: 'B. Moon Jae-In'
         },
         {
-            q: 'What is the capitol of South Korea?',
-            a: ['Incheon', 'Busan', 'Seoul', 'Pyeongchang'],
-            correct: 'Seoul'
+            q: '2. What is the capitol of South Korea?',
+            a: ['A. Incheon', 'B. Busan', 'C. Seoul', 'D. Pyeongchang'],
+            correct: 'C. Seoul'
         },
         {
-            q: 'What is the equivalent of "Cheers!" in Korean language?',
-            a: ['"Geonbae!"', '"Maekju!"', '"Gamsahabnida!"', '"Annyeong!"'],
-            correct: '"Geonbae!"'
+            q: '3. What is the equivalent of "Cheers!" in Korean language?',
+            a: ['A. "Geonbae!"', 'B. "Maekju!"', 'C. "Gamsahabnida!"', 'D. "Annyeong!"'],
+            correct: 'A. "Geonbae!"'
         },
         {
-            q: 'Which of the following is NOT a famous K-Pop group?',
-            a: ['BLACKPINK', 'BTS', 'iKON', 'HelloGoodbye'],
-            correct: 'HelloGoodbye'
+            q: '4. Which of the following is NOT a famous K-Pop group?',
+            a: ['A. BLACKPINK', 'B. BTS', 'C. iKON', 'D. HelloGoodbye'],
+            correct: 'D. HelloGoodbye'
         },
         {
-            q: 'Who created the written Korean language, "Hangeul"?',
-            a: ['Heo Jun', 'King Sejong', 'Gong Yoo', 'Yi Sun-Shin'],
-            correct: 'King Sejong'
+            q: '5. Who created the written Korean language, "Hangeul"?',
+            a: ['A. Heo Jun', 'B. King Sejong', 'C. Gong Yoo', 'D. Yi Sun-Shin'],
+            correct: 'B. King Sejong'
         },
         {
-            q: 'Which of the following is NOT a traditional Korean dish?',
-            a: ['Bibimbap', 'Kimchi Jjigae', 'Korean Fried Chicken', 'Japchae'],
-            correct: 'Korean Fried Chicken'
+            q: '6. Which of the following is NOT a traditional Korean dish?',
+            a: ['A. Bibimbap', 'B. Kimchi Jjigae', 'C. Korean Fried Chicken', 'D. Japchae'],
+            correct: 'C. Korean Fried Chicken'
         },
         {
-            q: 'What would you be doing if you went to a "Noraebang?"',
-            a: ['Getting a massage', 'Playing computer games', 'Buying groceries', 'Singing karaoke'],
-            correct: 'Singing karaoke'
+            q: '7. What would you be doing if you went to a "Noraebang?"',
+            a: ['A. Getting a massage', 'B. Playing computer games', 'C. Buying groceries', 'D. Singing karaoke'],
+            correct: 'D. Singing karaoke'
         },
         {
-            q: 'Which word in Korean means "Older Sister?"',
-            a: ['Oppa', 'Unnie', 'Noona', 'Hyeong'],
-            correct: 'Unnie'
+            q: '8. Which word in Korean means "Older Sister?"',
+            a: ['A. Oppa', 'B. Unnie', 'C. Noona', 'D. Hyeong'],
+            correct: 'B. Unnie'
         },
         {
-            q: 'Which of the following behaviors is considered impolite in Korean culture?',
-            a: ['Pouring your own drink', 'Shaking hands with both hands', 'Covering your chest and shoulders in public', 'Removing your shoes before entering someone\'s home'],
-            correct: 'Pouring your own drink'
+            q: '9. Which of the following behaviors is considered impolite in Korean culture?',
+            a: ['A. Pouring your own drink', 'B. Shaking hands with both hands', 'C. Covering your chest and shoulders in public', 'D. Removing your shoes before entering someone\'s home'],
+            correct: 'A. Pouring your own drink'
         },
         {
-            q: 'What is "soju?"',
-            a: ['A city in South Korea', 'A speech level', 'An alcoholic beverage', 'Korean traditional dress'],
-            correct: 'An alcoholic beverage'
+            q: '10. What is "soju?"',
+            a: ['A. A city in South Korea', 'B. A speech level', 'C. An alcoholic beverage', 'D. Korean traditional dress'],
+            correct: 'C. An alcoholic beverage'
         },
         {
-            q: 'When do Koreans traditionally add another year to their age?',
-            a: ['Their actual birth date', 'At Chuseok- the holiday that celebrates the harvest', 'When a new year begins on January 1', 'At Seollal- Lunar New Year'],
-            correct: 'When a new year begins on January 1'
+            q: '11. When do Koreans traditionally add another year to their age?',
+            a: ['A. Their actual birth date', 'B. At Chuseok- the holiday that celebrates the harvest', 'C. When a new year begins on January 1', 'D. At Seollal- Lunar New Year'],
+            correct: 'C. When a new year begins on January 1'
         },
         {
-            q: 'What is the national sport of Korea?',
-            a: ['Soccer', 'Baseball', 'Badminton', 'Taekwondo'],
-            correct: 'Baseball'
+            q: '12. What is the national sport of Korea?',
+            a: ['A. Soccer', 'B. Baseball', 'C. Badminton', 'D. Taekwondo'],
+            correct: 'B. Baseball'
         }
     ]
     // Start the timer at 75 seconds
@@ -106,11 +106,11 @@ $(document).ready(function () {
         // Determine right or wrong answer
         $('.answer-btn').on('click', function () {
             console.log('You answered: ' + this.value);
-            if (questions[questionIndex].correct === this.value) {
-                console.log('Correct!');
+            if (questions[questionIndex].correct !== this.value) {
+                timeLeft -= 10;
                 checker();
             } else {
-                timeLeft -= 10;
+                console.log('Correct!');
                 checker();
             }
         });
@@ -121,7 +121,6 @@ $(document).ready(function () {
         $('.row.centered').empty();
         userScore = timer.text();
         leaderboard.score = userScore;
-        console.log(leaderboard);
         clearInterval(timeInterval);
         // Creating the initials form
         const formHeader = $('<h3>').text(`Your score is ${userScore}.`);
@@ -141,7 +140,6 @@ $(document).ready(function () {
 
         
         submit.on('click', function () {
-            console.log('initials submitted');
             let initials = $('#initials-input').val();
             leaderboard.initials = initials;
             console.log(leaderboard);
