@@ -3,10 +3,7 @@ $(document).ready(function () {
     const questionsDiv = $('.quiz-questions');
     const timer = $('#time-left');
     let timeInterval;
-    let leaderboard = {
-        score: [],
-        initials: []
-    };
+    let leaderboard = {};
     let questionIndex = 0;
     let timeLeft = 75;
     // All quiz questions and answers
@@ -82,12 +79,19 @@ $(document).ready(function () {
         ask();
 
     }
+
+    const checker = () => {
+        questionIndex++;
+        if (questions[questionIndex] === undefined) {
+            endQuiz();
+        } else {
+            questionsDiv.empty();
+            ask();
+        }
+    }
+
     // Ask a quiz question depending on the current quiz index
     const ask = () => {
-        if (questions[questionIndex] === undefined) {
-            enterInitials();
-        }
-
         // Display the question
         const newQ = $('<h3>').addClass(['header', 'question-header']).text(questions[questionIndex].q);
         const answersArray = questions[questionIndex].a;
@@ -102,24 +106,21 @@ $(document).ready(function () {
         // Determine right or wrong answer
         $('.answer-btn').on('click', function () {
             console.log('You answered: ' + this.value);
-            if (questions[questionIndex].correct !== this.value) {
-                timeLeft -= 10;
-                questionIndex++
-            } else {
+            if (questions[questionIndex].correct === this.value) {
                 console.log('Correct!');
-                questionIndex++
+                checker();
+            } else {
+                timeLeft -= 10;
+                checker();
             }
-            // Clear previous question and ask next question
-            questionsDiv.empty();
-            ask();
         });
 
     }
 
-    const enterInitials = () => {
+    const endQuiz = () => {
         $('.row.centered').empty();
         userScore = timer.text();
-        leaderboard.score.push(userScore);
+        leaderboard.score = userScore;
         console.log(leaderboard);
         clearInterval(timeInterval);
         // Creating the initials form
@@ -138,12 +139,13 @@ $(document).ready(function () {
         $(field).append(input);
         $(form).append(submit);
 
-        // localStorage.setItem('userScore', leaderboard);
-        submit.on('submit', function () {
+        
+        submit.on('click', function () {
             console.log('initials submitted');
             let initials = $('#initials-input').val();
-            leaderboard.initials.push(initials);
+            leaderboard.initials = initials;
             console.log(leaderboard);
+            localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
         });
     }
 
