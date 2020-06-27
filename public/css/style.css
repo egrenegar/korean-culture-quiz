@@ -7,39 +7,32 @@
 }
 
 html,
-body,
+body{
+  height: 100vh;
+}
+
 .container {
   height: 100vh;
 }
 
-header {
-    height: 150px;
-    padding-top: 80px;
-    text-align: center;
-    font-size: 1.5rem;
+.ui.grid>#heading {
+  padding-top: 5rem;
 }
 
 #start-btn {
-    padding: 15px;
-    background-color: lightsalmon;
-    color: white;
-    text-align: center;
+  padding: 15px;
+  background-color: lightsalmon;
+  color: white;
+  text-align: center;
 }
 
 #start-btn:hover {
-    background-color: lightgray;
-}
-
-#button-container {
-    text-align: center;
-}
-
-.quiz-questions {
-  text-align: center;
+  background-color: lightgray;
 }
 
 .question-header {
   padding: 15px 8px 8px 8px;
+  text-align: center;
 }
 
 .answer-btn {
@@ -49,6 +42,7 @@ header {
   margin-top: 5px;
   border: none;
   background-color: lightsalmon;
+  text-align: left;
 }
 
 .answer-btn:hover {
