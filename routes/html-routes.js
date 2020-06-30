@@ -1,4 +1,3 @@
-const express = require('express');
 const path = require('path');
 
 module.exports = function (app) {
@@ -10,7 +9,7 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/quiz.html"));
   });
 
-  app.get('/initials', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/initials.html"));
+  app.get('/scores', function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/scores.html"));
   });
 }
