@@ -12,21 +12,18 @@
 
     <body>
         <nav class="ui menu">
-            <a class="item" href="/scores">
-                High Scores
-            </a>
             <a class="item" href="/">
                 Home
             </a>
-            <div class="right menu">
-                <a class="item">
-                    <span>Time Remaining: <span id="time-left">0</span> seconds</span>
-                </a>
-            </div>
         </nav>
-        <div class="ui column grid">
-            <div class="four wide column centered">
-                <div id="table">
+        <div class="ui grid">
+            <div class="row centered">
+                <h1>
+                    High Scores
+                </h1>
+            </div>
+            <div class="row centered">
+                <div class="five wide column" id="tableDiv">
                     <table class="ui celled table">
                         <thead>
                             <tr>
@@ -34,18 +31,14 @@
                                 <th>Score</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="Name">James</td>
-                                <td data-label="Age">24</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Name">Jill</td>
-                                <td data-label="Age">26</td>
-                            </tr>
+                        <tbody id="table-body">
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="row centered">
+                <a class="ui button" id="retakeQuiz-btn" href="/quiz">Retake Quiz</a>
+                <button class="ui button" id="clearScores-btn">Clear High Scores</button>
             </div>
         </div>
         <!--jQuery-->
