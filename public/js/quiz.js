@@ -3,7 +3,8 @@ $(document).ready(function () {
     const questionsDiv = $('.quiz-questions');
     const timer = $('#time-left');
     let timeInterval;
-    let leaderboard = {};
+    let userScore;
+    // let leaderboard = [];
     let questionIndex = 0;
     let timeLeft = 75;
     // All quiz questions and answers
@@ -120,16 +121,17 @@ $(document).ready(function () {
     const endQuiz = () => {
         $('.row.centered').empty();
         userScore = timer.text();
-        leaderboard.score = userScore;
+        // scoreArray.push(userScore);
         clearInterval(timeInterval);
         // Creating the initials form
         const formHeader = $('<h3>').text(`Your score is ${userScore}.`);
         const newRow = $('<div>').addClass(['row', 'centered']);
+        // const form = $('<form>').addClass(['ui', 'form']).attr('action', '/scores.html');
         const form = $('<div>').addClass(['ui', 'form']);
         const field = $('<div>').addClass('field');
         const label = $('<label>').text('Enter Your Initials:');
         const input = $('<input>').attr('type', 'text').attr('id', 'initials-input');
-        const submit = $('<a>').addClass(['ui', 'button']).text('Submit');
+        const submit = $('<input>').attr('type', 'submit').addClass(['ui', 'button']).text('Submit');
         $('.row.centered').append(formHeader);
         $('.ui.column.grid').append(newRow);
         $(newRow).append(form);
@@ -138,15 +140,34 @@ $(document).ready(function () {
         $(field).append(input);
         $(form).append(submit);
 
-        
+
         submit.on('click', function () {
-            let initials = $('#initials-input').val();
-            leaderboard.initials = initials;
-            console.log(leaderboard);
-            localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-        });
+            const initials = $('#initials-input').val();
+            let highScores = localStorage.getItem('highScores');
+
+            if (!highScores) {
+                highScores = [];
+            } else {
+                highScores = JSON.parse(highScores);
+            }
+
+            let scoreObj = {score: userScore, initials: initials};
+            highScores.push(scoreObj);
+            localStorage.setItem('highScores', JSON.stringify(highScores));
+            window.location.assign('/scores.html');
+
+        })
     }
 
     startTimer();
 
 });
+
+
+// create a blank object to push initials
+// key: user score & initials
+// value: score from score variable 
+// have two properties for 
+// scoreArr.push(userScore);
+// console.log(scoreArr);
+// console.log(userScore);
