@@ -126,7 +126,6 @@ $(document).ready(function () {
         // Creating the initials form
         const formHeader = $('<h3>').text(`Your score is ${userScore}.`);
         const newRow = $('<div>').addClass(['row', 'centered']);
-        // const form = $('<form>').addClass(['ui', 'form']).attr('action', '/scores.html');
         const form = $('<div>').addClass(['ui', 'form']);
         const field = $('<div>').addClass('field');
         const label = $('<label>').text('Enter Your Initials:');
@@ -141,7 +140,7 @@ $(document).ready(function () {
 
         // Set user initials and score to local storage
         submit.on('click', function () {
-            const initials = $('#initials-input').val();
+            const initials = $('#initials-input').val().trim();
             let highScores = localStorage.getItem('highScores');
 
             if (highScores !== null) {
