@@ -48,3 +48,7 @@ body{
 .answer-btn:hover {
   background-color: lightgrey;
 }
+
+#table {
+  margin-top: 3rem;
+}
