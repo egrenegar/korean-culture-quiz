@@ -2,12 +2,12 @@ $(document).ready(function () {
 
     const questionsDiv = $('.quiz-questions');
     const timer = $('#time-left');
-    let timeInterval;
-    let userScore;
-    // let leaderboard = [];
-    let questionIndex = 0;
     let timeLeft = 75;
-    // All quiz questions and answers
+    let timeInterval;
+    let questionIndex = 0;
+    let userScore;
+
+    // Quiz questions and answers
     const questions = [
         {
             q: '1. What is the name of South Korea\'s current president?',
@@ -46,8 +46,8 @@ $(document).ready(function () {
         },
         {
             q: '8. Which word in Korean means "Older Sister?"',
-            a: ['A. Oppa', 'B. Unnie', 'C. Noona', 'D. Hyeong'],
-            correct: 'B. Unnie'
+            a: ['A. Unnie', 'B. Oppa', 'C. Noona', 'D. Hyeong'],
+            correct: 'A. Unnie'
         },
         {
             q: '9. Which of the following behaviors is considered impolite in Korean culture?',
@@ -70,6 +70,7 @@ $(document).ready(function () {
             correct: 'B. Baseball'
         }
     ]
+
     // Start the timer at 75 seconds
     const startTimer = () => {
         timeInterval = setInterval(function () {
@@ -78,9 +79,9 @@ $(document).ready(function () {
         }, 1000);
 
         ask();
-
     }
 
+    // Check whether or not all questions have been answered
     const checker = () => {
         questionIndex++;
         if (questions[questionIndex] === undefined) {
@@ -121,7 +122,6 @@ $(document).ready(function () {
     const endQuiz = () => {
         $('.row.centered').empty();
         userScore = timer.text();
-        // scoreArray.push(userScore);
         clearInterval(timeInterval);
         // Creating the initials form
         const formHeader = $('<h3>').text(`Your score is ${userScore}.`);
@@ -131,24 +131,23 @@ $(document).ready(function () {
         const field = $('<div>').addClass('field');
         const label = $('<label>').text('Enter Your Initials:');
         const input = $('<input>').attr('type', 'text').attr('id', 'initials-input');
-        const submit = $('<input>').attr('type', 'submit').addClass(['ui', 'button']).text('Submit');
+        const submit = $('<input>').attr({type: 'submit', id: 'submitInitials-btn'}).addClass(['ui', 'button']).text('Submit');
         $('.row.centered').append(formHeader);
         $('.ui.column.grid').append(newRow);
         $(newRow).append(form);
-        $(form).append(field);
-        $(field).append(label);
-        $(field).append(input);
-        $(form).append(submit);
+        $(field).append([label, input]);
+        $(form).append([field, submit]);
+        
 
-
+        // Set user initials and score to local storage
         submit.on('click', function () {
             const initials = $('#initials-input').val();
             let highScores = localStorage.getItem('highScores');
 
-            if (!highScores) {
-                highScores = [];
-            } else {
+            if (highScores !== null) {
                 highScores = JSON.parse(highScores);
+            } else {
+                highScores = [];
             }
 
             let scoreObj = {score: userScore, initials: initials};
@@ -162,12 +161,3 @@ $(document).ready(function () {
     startTimer();
 
 });
-
-
-// create a blank object to push initials
-// key: user score & initials
-// value: score from score variable 
-// have two properties for 
-// scoreArr.push(userScore);
-// console.log(scoreArr);
-// console.log(userScore);
