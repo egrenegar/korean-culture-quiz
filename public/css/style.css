@@ -19,15 +19,11 @@ body{
   padding-top: 5rem;
 }
 
-#start-btn {
+#startQuiz-btn {
   padding: 15px;
   background-color: lightsalmon;
   color: white;
   text-align: center;
-}
-
-#start-btn:hover {
-  background-color: lightgray;
 }
 
 .question-header {
@@ -45,10 +41,28 @@ body{
   text-align: left;
 }
 
-.answer-btn:hover {
+#startQuiz-btn:hover,
+.answer-btn:hover,
+#clearScores-btn:hover,
+#retakeQuiz-btn:hover,
+#submitInitials-btn:hover {
   background-color: lightgrey;
 }
 
-#table {
-  margin-top: 3rem;
+#submitInitials-btn {
+  color: white;
+  background-color: lightsalmon;
 }
+
+#retakeQuiz-btn {
+  margin-right: 10px;
+  color: white;
+  background-color: lightsalmon;
+}
+
+#clearScores-btn {
+  margin-left: 10px;
+  color: white;
+  background-color: lightsalmon;
+}
+
