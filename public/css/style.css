@@ -15,8 +15,14 @@ body{
   height: 100vh;
 }
 
-.ui.grid>#heading {
+.ui.grid>.heading {
   padding-top: 5rem;
+}
+
+#description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  text-align: center;
 }
 
 #startQuiz-btn {
