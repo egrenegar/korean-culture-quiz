@@ -5,7 +5,7 @@ $(document).ready(function () {
     let timeLeft = 75;
     let timeInterval;
     let questionIndex = 0;
-    let userScore;
+    let score;
 
     // Quiz questions and answers
     const questions = [
@@ -121,16 +121,16 @@ $(document).ready(function () {
 
     const endQuiz = () => {
         $('.row.centered').empty();
-        userScore = timer.text();
+        score = timer.text();
         clearInterval(timeInterval);
         // Creating the initials form
-        const formHeader = $('<h3>').text(`Your score is ${userScore}.`);
+        const formHeader = $('<h3>').text(`Your score is ${score}.`);
         const newRow = $('<div>').addClass(['row', 'centered']);
         const form = $('<div>').addClass(['ui', 'form']);
         const field = $('<div>').addClass('field');
         const label = $('<label>').text('Enter Your Initials:');
-        const input = $('<input>').attr('type', 'text').attr('id', 'initials-input');
-        const submit = $('<input>').attr({type: 'submit', id: 'submitInitials-btn'}).addClass(['ui', 'button']).text('Submit');
+        const input = $('<input>').attr({type: 'text', id: 'initials-input'});
+        const submit = $('<input>').attr({type: 'submit', id: 'submitInitials-btn', class: 'ui button'}).text('Submit');
         $('.row.centered').append(formHeader);
         $('.ui.column.grid').append(newRow);
         $(newRow).append(form);
@@ -149,7 +149,7 @@ $(document).ready(function () {
                 highScores = [];
             }
 
-            let scoreObj = {score: userScore, initials: initials};
+            let scoreObj = {score, initials};
             highScores.push(scoreObj);
             localStorage.setItem('highScores', JSON.stringify(highScores));
             window.location.assign('/scores.html');
